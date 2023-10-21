@@ -1,56 +1,30 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class EntityBase : MonoBehaviour
 {
     public Entity_Profile_SO data;
-    enum State
-    {
-        Idle,
-        Walking,
-        Running,
-        Attacking,
-        Dead
-    }
+    private StateMachine _stateMachine;
     Animator _anim;
     private Rigidbody _rb;
-    
     private void Start()
     {
+        _stateMachine = GetComponent<StateMachine>();
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
-        if (data != null)
-        {
-            data.currentHealth = data.maxHealth;
-            data.currentStamina = data.maxStamina;           
-        }
 
+        data.currentHealth = data.maxHealth;
+        data.currentStamina = data.maxStamina;           
         gameObject.name = data.Name;
         
     }
-    
-    void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Die();
-        }
-    }
 
-    private void Update()
+    public void Heal(int amount, float delay)
     {
+        StartCoroutine(HealingCoroutine(amount, delay));
     }
-
-    public void getOlder()
-    {
-        data.currentAge++;
-        if (data.currentAge >= data.maxAge)
-        {
-            Die();
-        }
-    }
-    
     public void TakeDamage(int damage)
     {
         data.currentHealth -= damage;
@@ -60,10 +34,37 @@ public class EntityBase : MonoBehaviour
         }
     }
 
+    public void IncreaseStamina(int amount, float delay)
+    {
+        StartCoroutine(StaminaCoroutine(amount, delay));
+    }
+    public void DecreaseStamina(int amount)
+    {
+        data.currentStamina -= amount;
+        if (data.currentStamina <= 0)
+        {
+            data.currentStamina = 0;
+        }
+    }
+
     public void Die()
     {
-        Destroy(_rb, 2f);
-        _anim.SetTrigger("dead");
+        _stateMachine.ChangeState(StateMachine.State.Dead);
+        _anim.SetBool("dead", true);
+    }
+
+    private IEnumerator HealingCoroutine(int amount, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        data.currentHealth = Mathf.Min(data.maxHealth, data.currentHealth + amount);
+    }
+
+    private IEnumerator StaminaCoroutine(int amount, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        data.currentStamina = Mathf.Min(data.maxStamina, data.currentStamina + amount);
     }
 }
 

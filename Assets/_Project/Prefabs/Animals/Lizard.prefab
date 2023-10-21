@@ -391,9 +391,10 @@ GameObject:
   - component: {fileID: 7979196013395532419}
   - component: {fileID: 6338841574263709632}
   - component: {fileID: 8187451374493336663}
-  - component: {fileID: 6616431977864940904}
   - component: {fileID: 2304270792335603350}
-  - component: {fileID: 8227466032773927012}
+  - component: {fileID: 2324024146112518410}
+  - component: {fileID: 3877222503125574443}
+  - component: {fileID: 7523610499264445183}
   m_Layer: 0
   m_Name: Lizard
   m_TagString: Untagged
@@ -447,7 +448,7 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5606088340822068240}
-  - screenRelativeHeight: 0.05
+  - screenRelativeHeight: 0.01
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5208326688331984742}
@@ -473,29 +474,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!136 &6616431977864940904
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6842458599697738422}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.19834062
-  m_Height: 1.1473756
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.20033869, z: 0.013816476}
 --- !u!54 &2304270792335603350
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -519,11 +497,32 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 16
   m_CollisionDetection: 0
---- !u!114 &8227466032773927012
+--- !u!65 &2324024146112518410
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842458599697738422}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2945927, y: 0.36666945, z: 1.1638466}
+  m_Center: {x: 0, y: 0.18747847, z: -0.025207222}
+--- !u!114 &3877222503125574443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -535,7 +534,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927070b9af2968a49ba34e73284493f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 1eeab8ec0933f3a45b51a67522efe295, type: 2}
+--- !u!114 &7523610499264445183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842458599697738422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c658d8a8e51c1f4298d885e5406714f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
 --- !u!1 &7657876676996022963
 GameObject:
   m_ObjectHideFlags: 0
